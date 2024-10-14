@@ -1,6 +1,8 @@
 import'./index.css'
 import React,{ useState, useEffect} from 'react';
-import RocketCard from './componets/RocketCard'
+import RocketCard from './componets/RocketCard';
+import NavBar from './componets/NavBar';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
     function App() {
       const [launches, setLaunches] = useState([]);  // Estado para los lanzamientos
@@ -23,8 +25,9 @@ import RocketCard from './componets/RocketCard'
       }
 
     return (
-      <div className="container mx-auto p-5  h-full w-full  bg-black class=absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]">
+      <div className="container mx-auto p-5  h-full w-full  bg-black class=absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px] text-slate-200">
       <h1 className="text-4xl text-center mb-4 bebas-neue-normal font-bold text-neutral-400">SpaceX Launches</h1>
+      <NavBar />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {launches.map(launch => (
           <RocketCard
@@ -33,6 +36,7 @@ import RocketCard from './componets/RocketCard'
             date={launch.date_utc}
             details={launch.details}
             image={launch.links.patch.small}
+            success={launch.success}
           />
         ))}
       </div>
