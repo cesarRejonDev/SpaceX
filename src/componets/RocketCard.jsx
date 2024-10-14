@@ -14,11 +14,13 @@ const RocketCard = ({ name, date, success, details, image }) => {
         <div className="w-20 h-20 bg-gray-300 mx-auto mb-4"></div>  // Si no hay imagen, mostramos un placeholder
       )}
 
-      {/* Launch Date */}
+      {/* Launch Date y Success */}
+    <div className=" flex justify-between items-center">
       <p>Launch Date: {new Date(date).toLocaleDateString()}</p>
-
-      {/* Success or not */}
-      <p>{success ? 'Sucess' : 'Fail'}</p>
+      <p className={success ? 'px-2 bg-green-700 rounded-md font-bold' : 'px-2 bg-red-700  rounded-md font-bold'}>
+        {success ? 'Success' : 'Fail'}
+      </p>
+    </div>
 
       {/* launch Details */}
       <p>{details ? details : 'Witout Details'}</p>
