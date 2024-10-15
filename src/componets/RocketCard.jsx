@@ -1,18 +1,41 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import Heart from './icons/Heart';
 
+const handleFavorite = (data, isFavorite, setIsFavorite) => {
+ let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+ 
+ if (isFavorite) {
+  favorites = favorites.filter(fav => fav.id !== data.id );
+ } else{
+    favorites.push(data);
+ }
+
+  localStorage.setItem('favorites',JSON.stringify(favorites));
+  setIsFavorite(!isFavorite);
+}
+
 const RocketCard = ({ id, name, date, success, details, image}) => {
-  const handleFavorite = (data) => {
-    console.log(data);
-    // localStorage.setItem('favorito','');
-  }
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    const isFav = favorites.some(fav => fav.id === id);
+
+    if (isFav) {
+      setIsFavorite(true);
+    }
+  },[id])
+
   return (
-    <div className=" border border-slate-500 p-4;
-      p-4 rounded shadow-md ">
+    <div className="border border-slate-500 p-4 rounded shadow-md">
       {/* Nombre del lanzamiento */}
       <div className='flex justify-between items-center'>
-      <h2 className="text-lg font-bold bebas-neue-normal">{name}</h2>
-      <Heart className="size-6 cursor-pointer hover:fill-red-700" onClick={() => handleFavorite({id, name, date, success, details, image})} />
+        <h2 className="text-lg font-bold bebas-neue-normal">{name}</h2>
+        <Heart 
+          className={`size-6 cursor-pointer ${isFavorite ? 'fill-red-700' : 'hover:fill-red-700'}`}
+          onClick={() => handleFavorite({id, name, date, success, details, image}, isFavorite, setIsFavorite)} 
+        />
       </div>
       {/* Patch image of launch */}
       {image ? (
@@ -22,12 +45,12 @@ const RocketCard = ({ id, name, date, success, details, image}) => {
       )}
 
       {/* Launch Date y Success */}
-    <div className="flex justify-between items-center">
-      <p>Launch Date: {new Date(date).toLocaleDateString()}</p>
-      <p className={success ? 'px-2 bg-green-700 rounded-md font-bold' : 'px-2 bg-red-700  rounded-md font-bold'}>
-        {success ? 'Success' : 'Fail'}
-      </p>
-    </div>
+      <div className="flex justify-between items-center">
+        <p>Launch Date: {new Date(date).toLocaleDateString()}</p>
+        <p className={success ? 'px-2 bg-green-700 rounded-md font-bold' : 'px-2 bg-red-700  rounded-md font-bold'}>
+          {success ? 'Success' : 'Fail'}
+        </p>
+      </div>
 
       {/* launch Details */}
       <p>{details ? details : 'Witout Details'}</p>
