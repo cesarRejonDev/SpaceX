@@ -2,7 +2,6 @@ import'./index.css'
 import React,{ useState, useEffect} from 'react';
 import RocketCard from './componets/RocketCard';
 import NavBar from './componets/NavBar';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
     function App() {
       const [launches, setLaunches] = useState([]);  // Estado para los lanzamientos
