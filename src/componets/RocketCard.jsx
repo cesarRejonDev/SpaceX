@@ -39,7 +39,7 @@ const RocketCard = ({ id, name, date, success, details, image}) => {
       </div>
       {/* Patch image of launch */}
       {image ? (
-        <img src={image} alt={name} className="mx-auto mb-4 w-22 h-22" />
+        <img loading="lazy" src={image} alt={name} className="mx-auto mb-4 w-22 h-22" />
       ) : (
         <div className="w-20 h-20 bg-gray-300 mx-auto mb-4"></div>  // Si no hay imagen, mostramos un placeholder
       )}
