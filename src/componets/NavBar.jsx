@@ -10,7 +10,7 @@ const Navbar = () => {
         {/* Search Bar */}
         <div className="flex items-center space-x-2">
           <input
-            type="text"
+            type="search"
             placeholder="Search Launches..."
             className="bg-neutral-500 p-2x1 rounded-md border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent"
           />
