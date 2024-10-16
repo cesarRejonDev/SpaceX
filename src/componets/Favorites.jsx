@@ -4,6 +4,11 @@ import RocketCard from "./RocketCard"
 
 const Favorites = () => {
 	const [favs, setFavs] = useState([]);  // Estado para los lanzamientos
+	const [search, setSearch] = useState("");
+	
+	const handleChange = (e) => {
+		setSearch(e.target.value);
+	}
   
 	useEffect(() => {
 		const localStorageFavs = JSON.parse(localStorage.getItem('favorites')) || [];
